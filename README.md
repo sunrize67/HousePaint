@@ -1,2 +1,2 @@
-# HousePaint Scrum board
+# HousePaint
 Change wall color in a picture
