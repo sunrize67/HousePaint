@@ -12,11 +12,7 @@ class ImageSelect extends StatefulWidget {
   const ImageSelect({Key? key}) : super(key: key);
 
   @override
-  _ImageSelectState createState() => _ImageSelectState();
-}
 
-class _ImageSelectState extends State<ImageSelect> {
-  File? imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +21,7 @@ class _ImageSelectState extends State<ImageSelect> {
           title: const Text('Select Image'),
           centerTitle: true,
         ),
+
         body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
