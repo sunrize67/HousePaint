@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
 
 // ignore: unused_element
 Widget _uiWidget() {
+  var lng;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.center,
@@ -61,14 +62,12 @@ Widget _uiWidget() {
                 );
               },
             ).toList(),
-            value: this.lng,
-            underline: Container(
-              color: Color.transparent,
-            ),
+            value: lng,
+            underline: Container(),
             isExpanded: false,
             onChanged: (newVal) {
               setState(() {
-                this.lng = newVal;
+                lng = newVal;
                 LocalizationService().changeLocale(newVal!);
               });
             },
@@ -78,3 +77,5 @@ Widget _uiWidget() {
     ],
   );
 }
+
+void setState(Null Function() param0) {}
