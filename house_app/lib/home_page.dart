@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:house_app/localization_service.dart';
-import 'package:ms_material_color/ms_material_color.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,20 +12,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_typing_uninitialized_variables
+    var redAccent;
     return Scaffold(
       appBar: AppBar(
         // ignore: prefer_const_constructors
         title: Text('Flutter Multilanguage App'),
         elevation: 0,
-        backgroundColor: Color.redAccent,
+        backgroundColor: redAccent,
       ),
       body: Center(
         child: _iuWidget(),
       ),
     );
   }
+
+  _iuWidget() {}
 }
 
+// ignore: unused_element
 Widget _uiWidget() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +69,7 @@ Widget _uiWidget() {
             onChanged: (newVal) {
               setState(() {
                 this.lng = newVal;
-                LocalizationService().changeLocale(newVal);
+                LocalizationService().changeLocale(newVal!);
               });
             },
           ),
