@@ -30,6 +30,12 @@ dependencies:
   flutter:
     sdk: flutter
   
+  get: ^4.6.1
+  get_storage: ^2.0.3
+  colours: ^0.0.2
+  colour_log: ^0.2.1
+  material: any
+  ms_material_color: ^1.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,6 +47,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
     
+  
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
