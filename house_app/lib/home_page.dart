@@ -12,11 +12,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_typing_uninitialized_variables
     var redAccent;
     return Scaffold(
       appBar: AppBar(
-        // ignore: prefer_const_constructors
         title: Text('Flutter Multilanguage App'),
         elevation: 0,
         backgroundColor: redAccent,

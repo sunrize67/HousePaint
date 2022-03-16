@@ -212,7 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.11"
-<<<<<<< HEAD
   material:
     dependency: "direct main"
     description:
@@ -220,8 +219,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+2"
-=======
->>>>>>> 9f4f943d79c236e7392ec8edc5372271d6afede2
   material_color_utilities:
     dependency: transitive
     description:
