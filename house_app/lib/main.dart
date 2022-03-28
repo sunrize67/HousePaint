@@ -24,11 +24,10 @@ class MyApp extends StatelessWidget {
                 color: Colors.white,
                 iconSize: 50,
                 splashRadius: 30,
-                onPressed:() =>
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const ImageSelect()))
-            )
-        ),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ImageSelect())))),
         body: Center(child: SvgPicture.asset('assets/home1.svg')),
       ),
       title: 'HousePaint',
