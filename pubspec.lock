@@ -140,9 +140,9 @@ packages:
   opencv:
     dependency: "direct dev"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: opencv
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.4"
   path:
     dependency: transitive
