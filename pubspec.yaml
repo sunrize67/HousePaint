@@ -1,5 +1,5 @@
-name: opencv4_example
-description: Demonstrates how to use the opencv4 plugin.
+name: housePaintCV
+description: Practice
 publish_to: 'none'
 
 environment:

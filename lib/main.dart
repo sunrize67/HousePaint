@@ -1,18 +1,10 @@
-/*
- * flutter_opencv
- * https://mulgundkar.com
- * 
- * Copyright (c) 2020 Aditya Mulgundkar. All rights reserved.
- * See LICENSE for more details.
- */
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:housePaintCV/detectionWall.dart';
 import 'package:opencv/opencv.dart';
 import 'package:opencv/core/core.dart';
 
@@ -33,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   bool loaded = false;
 
   List<String> urls = [
-    "https://i.pinimg.com/564x/54/e2/ae/54e2aeefa75d031813ec56f6b3efc9ad.jpg",
+    "https://i.ibb.co/WkpdNWm/image4.png",
     "https://raw.githubusercontent.com/opencv/opencv/master/samples/data/sudoku.png",
     "https://raw.githubusercontent.com/opencv/opencv/master/samples/data/left.jpg",
     "https://raw.githubusercontent.com/opencv/opencv/master/samples/data/left01.jpg",
@@ -89,32 +81,30 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       switch (functionName) {
+        case 'special':
+         var det = Detection();
+          res = await det.detectionEdges(file);
+          break;
         case 'canny':
-          res = await ImgProc.canny(
-              await file.readAsBytes(), 100,200);
+          res = await ImgProc.canny(await file.readAsBytes(), 30,45);
           break;
         case 'blur':
-          res = await ImgProc.blur(
-              await file.readAsBytes(), [45, 45], [20, 30], Core.borderReflect);
+          res = await ImgProc.blur(await file.readAsBytes(), [45, 45], [20, 30], Core.borderReflect);
           break;
         case 'GaussianBlur':
-          res =
-              await ImgProc.gaussianBlur(await file.readAsBytes(), [45, 45], 0);
+          res = await ImgProc.gaussianBlur(await file.readAsBytes(), [45, 45], 0);
           break;
         case 'medianBlur':
           res = await ImgProc.medianBlur(await file.readAsBytes(), 45);
           break;
         case 'bilateralFilter':
-          res = await ImgProc.bilateralFilter(
-              await file.readAsBytes(), 15, 80, 80, Core.borderConstant);
+          res = await ImgProc.bilateralFilter(await file.readAsBytes(), 15, 80, 80, Core.borderConstant);
           break;
         case 'boxFilter':
-          res = await ImgProc.boxFilter(await file.readAsBytes(), 50, [45, 45],
-              [-1, -1], true, Core.borderConstant);
+          res = await ImgProc.boxFilter(await file.readAsBytes(), 50, [45, 45],[-1, -1], true, Core.borderConstant);
           break;
         case 'sqrBoxFilter':
-          res =
-              await ImgProc.sqrBoxFilter(await file.readAsBytes(), -1, [1, 1]);
+          res = await ImgProc.sqrBoxFilter(await file.readAsBytes(), -1, [1, 1]);
           break;
         case 'filter2D':
           res = await ImgProc.filter2D(await file.readAsBytes(), -1, [2, 2]);
@@ -126,68 +116,52 @@ class _MyAppState extends State<MyApp> {
           res = await ImgProc.erode(await file.readAsBytes(), [2, 2]);
           break;
         case 'morphologyEx':
-          res = await ImgProc.morphologyEx(
-              await file.readAsBytes(), ImgProc.morphTopHat, [5, 5]);
+          res = await ImgProc.morphologyEx(await file.readAsBytes(), ImgProc.morphTopHat, [5, 5]);
           break;
         case 'pyrUp':
-          res = await ImgProc.pyrUp(
-              await file.readAsBytes(), [563 * 2, 375 * 2], Core.borderDefault);
+          res = await ImgProc.pyrUp(await file.readAsBytes(), [563 * 2, 375 * 2], Core.borderDefault);
           break;
         case 'pyrDown':
-          res = await ImgProc.pyrDown(await file.readAsBytes(),
-              [563 ~/ 2.toInt(), 375 ~/ 2.toInt()], Core.borderDefault);
+          res = await ImgProc.pyrDown(await file.readAsBytes(), [563 ~/ 2.toInt(), 375 ~/ 2.toInt()], Core.borderDefault);
           break;
         case 'pyrMeanShiftFiltering':
-          res = await ImgProc.pyrMeanShiftFiltering(
-              await file.readAsBytes(), 10, 15);
+          res = await ImgProc.pyrMeanShiftFiltering(await file.readAsBytes(), 10, 15);
           break;
         case 'threshold':
-          res = await ImgProc.threshold(
-              await file.readAsBytes(), 80, 255, ImgProc.threshBinary);
+          res = await ImgProc.threshold(await file.readAsBytes(), 80, 255, ImgProc.threshBinary);
           break;
         case 'adaptiveThreshold':
-          res = await ImgProc.adaptiveThreshold(await file.readAsBytes(), 125,
-              ImgProc.adaptiveThreshMeanC, ImgProc.threshBinary, 11, 12);
+          res = await ImgProc.adaptiveThreshold(await file.readAsBytes(), 125, ImgProc.adaptiveThreshMeanC, ImgProc.threshBinary, 11, 12);
           break;
         case 'copyMakeBorder':
-          res = await ImgProc.copyMakeBorder(
-              await file.readAsBytes(), 20, 20, 20, 20, Core.borderConstant);
+          res = await ImgProc.copyMakeBorder(await file.readAsBytes(), 20, 20, 20, 20, Core.borderConstant);
           break;
         case 'sobel':
           res = await ImgProc.sobel(await file.readAsBytes(), -1, 1, 1);
           break;
         case 'scharr':
-          res = await ImgProc.scharr(
-              await file.readAsBytes(), ImgProc.cvSCHARR, 0, 1);
+          res = await ImgProc.scharr(await file.readAsBytes(), ImgProc.cvSCHARR, 0, 1);
           break;
         case 'laplacian':
           res = await ImgProc.laplacian(await file.readAsBytes(), 10);
           break;
         case 'distanceTransform':
-          res = await ImgProc.threshold(
-              await file.readAsBytes(), 80, 255, ImgProc.threshBinary);
+          res = await ImgProc.threshold(await file.readAsBytes(), 80, 255, ImgProc.threshBinary);
           res = await ImgProc.distanceTransform(await res, ImgProc.distC, 3);
           break;
         case 'resize':
-          res = await ImgProc.resize(
-              await file.readAsBytes(), [500, 500], 0, 0, ImgProc.interArea);
+          res = await ImgProc.resize(await file.readAsBytes(), [500, 500], 0, 0, ImgProc.interArea);
           break;
         case 'applyColorMap':
-          res = await ImgProc.applyColorMap(
-              await file.readAsBytes(), ImgProc.colorMapHot);
+          res = await ImgProc.applyColorMap(await file.readAsBytes(), ImgProc.colorMapHot);
           break;
         case 'houghLines':
           res = await ImgProc.canny(await file.readAsBytes(), 50, 200);
-          res = await ImgProc.houghLines(await res,
-              threshold: 300, lineColor: "#ff0000");
+          res = await ImgProc.houghLines(await res, threshold: 300, lineColor: "#ff0000");
           break;
         case 'houghLinesProbabilistic':
           res = await ImgProc.canny(await file.readAsBytes(), 50, 200);
-          res = await ImgProc.houghLinesProbabilistic(await res,
-              threshold: 50,
-              minLineLength: 50,
-              maxLineGap: 10,
-              lineColor: "#ff0000");
+          res = await ImgProc.houghLinesProbabilistic(await res, threshold: 50, minLineLength: 50, maxLineGap: 10, lineColor: "#ff0000");
           break;
         case 'houghCircles':
           res = await ImgProc.cvtColor(await file.readAsBytes(), 6);
@@ -274,6 +248,7 @@ class _MyAppState extends State<MyApp> {
                     },
                     items: <String>[
                       'None',
+                      'special',
                       'canny',
                       'blur',
                       'GaussianBlur',
