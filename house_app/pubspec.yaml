@@ -43,6 +43,8 @@ dependencies:
   image_picker: ^0.8.4+5
   flutter_svg: ^1.0.3
   flutter_image: ^4.1.0
+  image_painter: ^0.4.5
+  open_file: ^3.2.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/home1.svg
+     - assets/10.jpg
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'image_painter.dart';
+
 class ImageSelect extends StatefulWidget {
   const ImageSelect({Key? key}) : super(key: key);
   @override
@@ -24,80 +26,95 @@ class _ImageSelectState extends State<ImageSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Select Image'),
-        ),
-        // backgroundColor: Color.fromARGB(255, 128, 0, 32),
-        backgroundColor: Colors.grey.shade300,
-        body: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (imageFile != null)
-                  ColorFiltered(
-                    colorFilter: ColorFilter.mode(changeColor, BlendMode.hue),
-                    child: Container(
-                      width: 640,
-                      height: 480,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        image: DecorationImage(image: FileImage(imageFile!)),
-                        border: Border.all(width: 8, color: Colors.black12),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                  )
-                else
-                  Container(
+      appBar: AppBar(
+        title: const Text('Select Image'),
+      ),
+      // backgroundColor: Color.fromARGB(255, 128, 0, 32),
+      backgroundColor: Colors.grey.shade300,
+      body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (imageFile != null)
+                ColorFiltered(
+                  colorFilter: ColorFilter.mode(changeColor, BlendMode.hue),
+                  child: Container(
                     width: 640,
                     height: 480,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.grey,
+                      image: DecorationImage(image: FileImage(imageFile!)),
                       border: Border.all(width: 8, color: Colors.black12),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    child: const Text(
-                      'Your Image Should Appear Here',
-                      style: TextStyle(fontSize: 26),
-                      textAlign: TextAlign.center,
-                    ),
                   ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                        child: ElevatedButton.icon(
-                            onPressed: () =>
-                                getImage(source: ImageSource.camera),
-                            icon: const Icon(Icons.camera),
-                            label: const Text('Camera'),
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color.fromARGB(255, 200, 50, 50))))),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
+                )
+              else
+                Container(
+                  width: 640,
+                  height: 480,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(width: 8, color: Colors.black12),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: const Text(
+                    'Your Image Should Appear Here',
+                    style: TextStyle(fontSize: 26),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
                       child: ElevatedButton.icon(
-                          onPressed: () =>
-                              getImage(source: ImageSource.gallery),
-                          icon: Icon(Icons.image),
-                          label: const Text('Gallery'),
+                          onPressed: () => getImage(source: ImageSource.camera),
+                          icon: const Icon(Icons.camera),
+                          label: const Text('Camera'),
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 200, 50, 50)))),
+                                  Color.fromARGB(255, 200, 50, 50))))),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                        onPressed: () => getImage(source: ImageSource.gallery),
+                        icon: Icon(Icons.image),
+                        label: const Text('Gallery'),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 200, 50, 50)))),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      icon: Icon(Icons.brush),
+                      label: const Text('Edit'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromARGB(255, 200, 50, 50))),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ImagePainterExample())),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                buildColorIcons(),
-              ],
-            )));
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              buildColorIcons(),
+            ],
+          )),
+    );
   }
 
   Widget buildColorIcons() => Row(
