@@ -27,7 +27,7 @@ class _ImageSelectState extends State<ImageSelect> {
         appBar: AppBar(
           title: const Text('Select Image'),
         ),
-       // backgroundColor: Color.fromARGB(255, 128, 0, 32),
+        // backgroundColor: Color.fromARGB(255, 128, 0, 32),
         backgroundColor: Colors.grey.shade300,
         body: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -36,7 +36,7 @@ class _ImageSelectState extends State<ImageSelect> {
               children: [
                 if (imageFile != null)
                   ColorFiltered(
-                    colorFilter: ColorFilter.mode(changeColor, BlendMode.softLight),
+                    colorFilter: ColorFilter.mode(changeColor, BlendMode.hue),
                     child: Container(
                       width: 640,
                       height: 480,
@@ -97,43 +97,41 @@ class _ImageSelectState extends State<ImageSelect> {
                 ),
                 buildColorIcons(),
               ],
-            )
-        )
-    );
+            )));
   }
 
   Widget buildColorIcons() => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [for (var i = 0; i < 6; i++) buildIconBtn(myColors[i])],
-    );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [for (var i = 0; i < 6; i++) buildIconBtn(myColors[i])],
+      );
 
   Widget buildIconBtn(Color myColor) => Container(
-    child: Stack(
-      children: [
-        Positioned(
-          top: 12.5,
-          left: 12.5,
-          child: Icon(
-            Icons.check,
-            size: 20,
-            color: changeColor == myColor ? myColor : Colors.transparent,
-          ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 12.5,
+              left: 12.5,
+              child: Icon(
+                Icons.check,
+                size: 20,
+                color: changeColor == myColor ? myColor : Colors.transparent,
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.circle,
+                color: myColor.withOpacity(0.65),
+                size: 30,
+              ),
+              onPressed: () {
+                setState(() {
+                  changeColor = myColor;
+                });
+              },
+            ),
+          ],
         ),
-        IconButton(
-          icon: Icon(
-            Icons.circle,
-            color: myColor.withOpacity(0.65),
-            size: 30,
-          ),
-          onPressed: () {
-            setState(() {
-              changeColor = myColor;
-            });
-          },
-        ),
-      ],
-    ),
-  );
+      );
 
   void getImage({required ImageSource source}) async {
     final file = await ImagePicker().pickImage(source: source);
